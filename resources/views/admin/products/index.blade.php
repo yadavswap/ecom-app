@@ -41,7 +41,7 @@
                                         href="{{ route('product.edit', $product->id) }}"></a>
                                     <a class="btn btn-sm btn-danger ti-trash" title="Delete"
                                         href="{{ route('pro.delete', $product->id) }}"></a>
-                                    <button class="btn btn-sm btn-primary ti-view-list-alt" title="Details"></button>
+                                    <a class="btn btn-sm btn-primary ti-view-list-alt" title="Details" href="{{ route('product.show', $product->id) }}"></a>
                                 </td>
                             </tr>
                         @endforeach
