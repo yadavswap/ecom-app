@@ -35,13 +35,37 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // validate 
+        $request->validate([
+            'name'=>'required',
+            'description'=>'required',
+            'price'=>'required',
+            'image'=>'image|required'
+        ]);
+        // upload image
+
+        if($request->hasFile('image')){
+            $image = $request->image;
+            $image->move('uploads',$image->getClientOriginalName());
+        }
+
+        // save data 
+
+        Product::create([
+            'name'=>$request->name,
+            'description'=>$request->description,
+            'price'=>$request->price,
+            'image'=>$request->image->getClientOriginalName()
+        ]);
+
+        return redirect('product/create')->with('msg','Your Product has been added.');
         // dd($request->all());
-        $product = new Product();
-        $product->name=$request->name;
-        $product->price=$request->price;
-        $product->description=$request->description;
-        $product->image=$request->image;
-        $product->save();
+        // $product = new Product();
+        // $product->name=$request->name;
+        // $product->price=$request->price;
+        // $product->description=$request->description;
+        // $product->image=$request->image;
+        // $product->save();
 
     }
 
