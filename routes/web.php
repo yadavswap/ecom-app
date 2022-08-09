@@ -16,6 +16,9 @@
 // });
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
 
 Route::get('/',[DashboardController::class,'index'])->name('dashboard');
 Route::resource('product','ProductController');
+Route::get('products/delete/{id}',[ProductController::class,'destroy'])->name('pro.delete');
+Route::post('products/update/{id}',[ProductController::class,'update'])->name('pro.update');

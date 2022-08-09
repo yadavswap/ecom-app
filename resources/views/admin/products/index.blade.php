@@ -4,7 +4,11 @@
     View Products
 @endsection
 <div class="row">
-
+    @if (session()->has('msg'))
+        <div class="alert alert-success">
+            {{ session()->get('msg') }}
+        </div>
+    @endif
     <div class="col-md-12">
         <div class="card">
             <div class="header">
@@ -24,23 +28,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($products as $product)
-                        
-                
-                        <tr>
-                            <td>{{$product->id}}</td>
-                            <td>{{$product->name}}</td>
-                            <td>{{$product->price}}</td>
-                            <td>{{$product->description}}</td>
-                            <td><img src="{{asset('uploads/'.$product->image)}}" alt="{{$product->image}}" class="img-thumbnail"
-                                    style="width: 50px"></td>
-                            <td>
-                                <button class="btn btn-sm btn-info ti-pencil-alt" title="Edit"></button>
-                                <button class="btn btn-sm btn-danger ti-trash" title="Delete"></button>
-                                <button class="btn btn-sm btn-primary ti-view-list-alt" title="Details"></button>
-                            </td>
-                        </tr>
-                         @endforeach
+                        @foreach ($products as $product)
+                            <tr>
+                                <td>{{ $product->id }}</td>
+                                <td>{{ $product->name }}</td>
+                                <td>{{ $product->price }}</td>
+                                <td>{{ $product->description }}</td>
+                                <td><img src="{{ asset('uploads/' . $product->image) }}" alt="{{ $product->image }}"
+                                        class="img-thumbnail" style="width: 50px"></td>
+                                <td>
+                                    <a class="btn btn-sm btn-info ti-pencil-alt" title="Edit"
+                                        href="{{ route('product.edit', $product->id) }}"></a>
+                                    <a class="btn btn-sm btn-danger ti-trash" title="Delete"
+                                        href="{{ route('pro.delete', $product->id) }}"></a>
+                                    <button class="btn btn-sm btn-primary ti-view-list-alt" title="Details"></button>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
 

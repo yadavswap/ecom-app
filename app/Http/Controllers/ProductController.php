@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('admin.products.index',compact('products'));
+        return view('admin.products.index', compact('products'));
     }
 
     /**
@@ -36,30 +36,30 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // validate 
+        // validate
         $request->validate([
-            'name'=>'required',
-            'description'=>'required',
-            'price'=>'required',
-            'image'=>'image|required'
+            'name'        => 'required',
+            'description' => 'required',
+            'price'       => 'required',
+            'image'       => 'image|required',
         ]);
         // upload image
 
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $image = $request->image;
-            $image->move('uploads',$image->getClientOriginalName());
+            $image->move('uploads', $image->getClientOriginalName());
         }
 
-        // save data 
+        // save data
 
         Product::create([
-            'name'=>$request->name,
-            'description'=>$request->description,
-            'price'=>$request->price,
-            'image'=>$request->image->getClientOriginalName()
+            'name'        => $request->name,
+            'description' => $request->description,
+            'price'       => $request->price,
+            'image'       => $request->image->getClientOriginalName(),
         ]);
 
-        return redirect('product/create')->with('msg','Your Product has been added.');
+        return redirect('product/create')->with('msg', 'Your Product has been added.');
         // dd($request->all());
         // $product = new Product();
         // $product->name=$request->name;
@@ -89,19 +89,41 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        return view('admin.products.edit', compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+
+        $product = Product::find($id);
+        $request->validate([
+            'name'        => 'required',
+            'description' => 'required',
+            'price'       => 'required',
+        ]);
+
+        // if check there is any image
+        if ($request->hasFile('image')) {
+            // // if check old image inside folder
+            // if (file_exists(public_path('uploads/') . $product->image)) {
+            //     unlink(public_path('uploads/') . $product->image);
+            // }
+            // upload new image
+            $image = $request->image;
+            $image->move('uploads', $image->getClientOriginalName());
+            $product->image = $request->image->getClientOriginalName();
+
+        }
+
+        $product->name        = $request->name;
+        $product->description = $request->description;
+        $product->price       = $request->price;
+        $product->image       = $product->image;
+        $product->save();
+
+        return redirect('product')->with('msg', 'Your Product has been updated.');
+
     }
 
     /**
@@ -112,6 +134,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return redirect('product')->with('msg', 'Your Product has been added.');
+
     }
 }
