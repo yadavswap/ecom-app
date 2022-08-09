@@ -29,3 +29,6 @@ Route::get('products/show/{id}',[ProductController::class,'show'])->name('pro.sh
 Route::resource('order','OrderController');
 Route::get('confirm/{id}',[OrderController::class,'confirm'])->name('order.confirm');
 Route::get('pending/{id}',[OrderController::class,'pending'])->name('order.pending');
+
+//user
+Route::resource('user','UserController');
