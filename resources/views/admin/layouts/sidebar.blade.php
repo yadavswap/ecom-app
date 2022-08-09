@@ -21,7 +21,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{{route('product.index')}}">
                             <i class="ti-view-list-alt"></i>
                             <p>View Products</p>
                         </a>
