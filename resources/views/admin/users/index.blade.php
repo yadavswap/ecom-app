@@ -30,7 +30,8 @@
                                     <td>{{ $user->created_at }}</td>
                                     <td>
                                         <button class="btn btn-sm btn-success ti-close" title="Block User"></button>
-                                        <button class="btn btn-sm btn-primary ti-view-list-alt" title="Details"></button>
+                                        <a class="btn btn-sm btn-primary ti-view-list-alt" title="Details"
+                                            href={{ route('user.show', $user->id) }}></a>
                                     </td>
                                 </tr>
                             @endforeach
