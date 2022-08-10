@@ -13,14 +13,15 @@
 
     <!-- Page Features -->
     <div class="row text-center">
-
+        @foreach($products as $product)
+            
         <div class="col-lg-3 col-md-6 mb-4">
             <div class="card">
-                <img class="card-img-top" src="images/01.jpg" alt="">
+                <img class="card-img-top" src="{{asset('uploads'.'/'.$product->image)}}" alt="">
                 <div class="card-body">
-                    <h5 class="card-title">LENOVO prenosnik Yoga 900 13ISK</h5>
+                    <h5 class="card-title">{{$product->name}}</h5>
                     <p class="card-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.
+                        {{$product->description}}
                     </p>
                 </div>
                 <div class="card-footer"> 
@@ -30,7 +31,9 @@
                 </div>
             </div>
         </div>
+                @endforeach
 
+{{--  
         <div class="col-lg-3 col-md-6 mb-4">
             <div class="card">
                 <img class="card-img-top" src="images/04_25.jpg" alt=""><!-- Image size 500*325 -->
@@ -77,7 +80,7 @@
                         Cart</a>
                 </div>
             </div>
-        </div>
+        </div>  --}}
 
 
     </div>

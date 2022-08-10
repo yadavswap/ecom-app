@@ -60,13 +60,7 @@ class ProductController extends Controller
         ]);
 
         return redirect('product/create')->with('msg', 'Your Product has been added.');
-        // dd($request->all());
-        // $product = new Product();
-        // $product->name=$request->name;
-        // $product->price=$request->price;
-        // $product->description=$request->description;
-        // $product->image=$request->image;
-        // $product->save();
+       
 
     }
 

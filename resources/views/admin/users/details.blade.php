@@ -11,7 +11,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="header">
-                    <h4 class="title">{{ $orders[0]->user->name }} Orders Details</h4>
+                    {{--  <h4 class="title">{{ $orders[0]->user->name }} Orders Details</h4>  --}}
                     <p class="category">List of all registered users</p>
                 </div>
                 <div class="content table-responsive table-full-width">

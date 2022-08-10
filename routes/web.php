@@ -15,10 +15,11 @@
 //     return view('welcome');
 // });
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\RegisterController;
 
 Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 Route::resource('product','ProductController');
@@ -34,3 +35,5 @@ Route::get('pending/{id}',[OrderController::class,'pending'])->name('order.pendi
 //user
 Route::resource('user','UserController');
 Route::get('/',[HomeController::class,'index'])->name('dashboard');
+Route::get('/register',[RegisterController::class,'index'])->name('user.register');
+Route::post('/register/store',[RegisterController::class,'store'])->name('user.register.store');
