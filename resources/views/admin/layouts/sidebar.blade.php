@@ -9,7 +9,7 @@
 
                 <ul class="nav">
                     <li>
-                        <a href="">
+                        <a href="{{route('dashboard')}}">
                             <i class="ti-panel"></i>
                             <p>Dashboard</p>
                         </a>

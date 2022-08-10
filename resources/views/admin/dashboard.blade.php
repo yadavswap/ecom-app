@@ -22,9 +22,9 @@ Dashboard
                 </div>
                 <div class="footer">
                     <hr />
-                    <div class="stats">
-                        <i class="ti-panel"></i> Details
-                    </div>
+                     <a href="{{route('user.index')}}"> <div class="stats">
+                      <i class="ti-panel"></i> Details
+                    </div></a>
                 </div>
             </div>
         </div>
@@ -41,15 +41,15 @@ Dashboard
                     <div class="col-xs-7">
                         <div class="numbers">
                             <p>Products</p>
-                            $1,345
+                            Rs {{$products->count()}}
                         </div>
                     </div>
                 </div>
                 <div class="footer">
                     <hr />
-                    <div class="stats">
+                    <a href="{{route('product.index')}}"> <div class="stats">
                         <i class="ti-panel"></i> Details
-                    </div>
+                    </div></a>
                 </div>
             </div>
         </div>
@@ -66,15 +66,15 @@ Dashboard
                     <div class="col-xs-7">
                         <div class="numbers">
                             <p>Orders</p>
-                            23
+                           {{$orders->count()}}
                         </div>
                     </div>
                 </div>
                 <div class="footer">
                     <hr />
-                    <div class="stats">
+                  <a href="{{route('order.index')}}">  <div class="stats">
                         <i class="ti-panel"></i> Details
-                    </div>
+                    </div></a>
                 </div>
             </div>
         </div>
@@ -91,15 +91,15 @@ Dashboard
                     <div class="col-xs-7">
                         <div class="numbers">
                             <p>Users</p>
-                            45
+                             {{$users->count()}}
                         </div>
                     </div>
                 </div>
                 <div class="footer">
                     <hr />
-                    <div class="stats">
+                 <a href="{{route('user.index')}}">    <div class="stats">
                         <i class="ti-panel"></i> Details
-                    </div>
+                    </div></a>
                 </div>
             </div>
         </div>
