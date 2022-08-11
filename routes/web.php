@@ -19,6 +19,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\LoginController;
 use App\Http\Controllers\Front\RegisterController;
 
 Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
@@ -37,3 +38,12 @@ Route::resource('user','UserController');
 Route::get('/',[HomeController::class,'index'])->name('dashboard');
 Route::get('/register',[RegisterController::class,'index'])->name('user.register');
 Route::post('/register/store',[RegisterController::class,'store'])->name('user.register.store');
+// login
+
+Route::get('/login',[LoginController::class,'login'])->name('user.login');
+Route::post('/login',[LoginController::class,'store'])->name('user.store');
+Route::get('/logout',[LoginController::class,'logout'])->name('user.logout');
+
+Route::get('/user/profile',function(){
+    return 'profile';
+})->name('user.profile');
