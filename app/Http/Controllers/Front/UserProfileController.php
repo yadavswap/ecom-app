@@ -18,4 +18,10 @@ class UserProfileController extends Controller
         // dd($order);
         return view('front.profile.index',compact(['user','orders']));
     }
+
+    public function show($id)
+    {
+        $order = Order::find($id);
+       return view('front.profile.details',compact('order'));
+    }
 }

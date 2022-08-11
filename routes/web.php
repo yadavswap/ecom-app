@@ -45,4 +45,5 @@ Route::get('/login',[LoginController::class,'login'])->name('user.login');
 Route::post('/login',[LoginController::class,'store'])->name('user.store');
 Route::get('/logout',[LoginController::class,'logout'])->name('user.logout');
 Route::get('/profile',[UserProfileController::class,'index'])->name('profile.index');
+Route::get('/user/order/{id}',[UserProfileController::class,'show'])->name('user.show');
 
