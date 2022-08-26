@@ -23,6 +23,7 @@ use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\LoginController;
 use App\Http\Controllers\Front\RegisterController;
 use App\Http\Controllers\Front\UserProfileController;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 Route::resource('product','ProductController');
@@ -53,3 +54,6 @@ Route::get('/user/order/{id}',[UserProfileController::class,'show'])->name('user
 
 Route::get('/cart',[CartController::class,'index'])->name('cart.index');
 Route::post('/cart',[CartController::class,'store'])->name('cart.store');
+Route::get('/empty',function(){
+    Cart::instance()->destroy();
+});
