@@ -94,25 +94,7 @@
             @endforeach
             
                  </tr>
-            {{--  @dd($orders[0]->user);  --}}
-           
-            {{-- @foreach ($products as $product)
-                            <tr>
-                                <td>{{ $product->id }}</td>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ $product->price }}</td>
-                                <td>{{ $product->description }}</td>
-                                <td><img src="{{ asset('uploads/' . $product->image) }}" alt="{{ $product->image }}"
-                                        class="img-thumbnail" style="width: 50px"></td>
-                                <td>
-                                    <a class="btn btn-sm btn-info ti-pencil-alt" title="Edit"
-                                        href="{{ route('product.edit', $product->id) }}"></a>
-                                    <a class="btn btn-sm btn-danger ti-trash" title="Delete"
-                                        href="{{ route('pro.delete', $product->id) }}"></a>
-                                    <a class="btn btn-sm btn-primary ti-view-list-alt" title="Details" href="{{ route('product.show', $product->id) }}"></a>
-                                </td>
-                            </tr>
-                        @endforeach --}}
+         
         </tbody>
     </table>
 @endsection

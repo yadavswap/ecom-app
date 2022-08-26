@@ -28,7 +28,7 @@ class LoginController extends Controller
             return back()->with(["msg", "wrong details please try again"]);
 
         }
-        return redirect()->route('user.profile');
+        return redirect()->route('profile.index');
     }
 
     public function logout()

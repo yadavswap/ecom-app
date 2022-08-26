@@ -18,6 +18,7 @@
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\LoginController;
 use App\Http\Controllers\Front\RegisterController;
@@ -47,3 +48,8 @@ Route::get('/logout',[LoginController::class,'logout'])->name('user.logout');
 Route::get('/profile',[UserProfileController::class,'index'])->name('profile.index');
 Route::get('/user/order/{id}',[UserProfileController::class,'show'])->name('user.show');
 
+
+// cart
+
+Route::get('/cart',[CartController::class,'index'])->name('cart.index');
+Route::post('/cart',[CartController::class,'store'])->name('cart.store');
