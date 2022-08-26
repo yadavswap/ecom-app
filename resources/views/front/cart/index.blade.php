@@ -95,7 +95,7 @@
             <h4>{{ Cart::instance('saveForLater')->count() }} items Save for Later</h4>
             <table class="table">
                 <tbody>
-                    @foreach(Cart::instance('saveForLater')->content() as $item)
+                    @foreach (Cart::instance('saveForLater')->content() as $item)
                         <tr>
                             @php
                                 $description = App\product::find($item->id);
@@ -105,7 +105,11 @@
                                 <strong>{{ $item->name }}</strong><br> {{ $description->description }}
                             </td>
                             <td>
-                                <a href="">Remove</a><br>
+                                <form action={{ route('cart.saveForLaterDestroy', $item->rowId) }} method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-link btn-large">Remove</button><br>
+                                </form>
                                 <a href="">Move to Cart</a>
                             </td>
                             <td>

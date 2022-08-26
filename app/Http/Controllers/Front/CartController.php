@@ -16,10 +16,10 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-        $dub = Cart::instance('default')->search(function($cartItem ,$rowId)use($request){
+        $dub = Cart::instance('default')->search(function ($cartItem, $rowId) use ($request) {
             return $cartItem->id === $request->id;
         });
-        if($dub->isNotEmpty()){
+        if ($dub->isNotEmpty()) {
             return redirect()->back()->with('msg', 'Item is  already in cart !');
 
         }
@@ -33,24 +33,30 @@ class CartController extends Controller
         Cart::remove($id);
         return redirect()->back()->with('msg', 'Item has been remove from cart !');
 
-   
     }
 
     public function saveForLater($id)
     {
-    //    dd($id);
+        //    dd($id);
 
         $item = Cart::get($id);
         Cart::remove($id);
-        $dub = Cart::instance('saveForLater')->search(function($cartItem ,$rowId)use($id){
+        $dub = Cart::instance('saveForLater')->search(function ($cartItem, $rowId) use ($id) {
             return $cartItem->id === $id;
         });
-        if($dub->isNotEmpty()){
+        if ($dub->isNotEmpty()) {
             return redirect()->back()->with('msg', 'Item is  saved for later already !');
 
         }
         Cart::instance('saveForLater')->add($item->id, $item->name, 1, $item->price, 0);
         return redirect()->back()->with('msg', 'Item has been saved for later !');
+
+    }
+
+    public function saveForLaterDestroy($id)
+    {
+        Cart::instance('saveForLater')->remove($id);
+        return redirect()->back()->with('msg', 'Item has been remove from save for later !');
 
     }
 }
