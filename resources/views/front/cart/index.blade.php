@@ -84,14 +84,14 @@
                     <a href="/"class="btn btn-outline-dark">Continue Shopping</a>
         @endif
         <div class="col-md-12">
-            @if (session()->has('msg'))
+            {{-- @if (session()->has('msg'))
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     {{ session()->get('msg') }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-            @endif
+            @endif --}}
             <h4>{{ Cart::instance('saveForLater')->count() }} items Save for Later</h4>
             <table class="table">
                 <tbody>
@@ -110,7 +110,7 @@
                                     @method('delete')
                                     <button class="btn btn-link btn-large">Remove</button><br>
                                 </form>
-                                <a href="">Move to Cart</a>
+                                <a href="{{ route('cart.moveToCart', $item->rowId) }}">Move to Cart</a>
                             </td>
                             <td>
                                 <select name="" id="" class="form-control" style="width: 4.7em">
