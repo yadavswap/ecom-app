@@ -57,3 +57,5 @@ Route::post('/cart',[CartController::class,'store'])->name('cart.store');
 Route::get('/empty',function(){
     Cart::instance()->destroy();
 });
+Route::delete('/cart/destroy/{id}',[CartController::class,'destroy'])->name('cart.destroy');
+

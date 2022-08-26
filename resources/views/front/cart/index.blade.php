@@ -8,6 +8,14 @@
             <div class="cart-items">
                 <div class="row">
                     <div class="col-md-12">
+                        @if (session()->has('msg'))
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                {{ session()->get('msg') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                         <table class="table">
                             <tbody>
                                 @foreach (Cart::instance('default')->content() as $item)
@@ -15,13 +23,18 @@
                                         @php
                                             $description = App\product::find($item->id);
                                         @endphp
-                                        <td><img src="{{ asset('uploads' . '/' . $description->image) }}" style="width: 5em">
+                                        <td><img src="{{ asset('uploads' . '/' . $description->image) }}"
+                                                style="width: 5em">
                                         </td>
                                         <td>
                                             <strong>{{ $item->name }}</strong><br> {{ $description->description }}
                                         </td>
                                         <td>
-                                            <a href="">Remove</a><br>
+                                            <form action={{ route('cart.destroy', $item->rowId) }} method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-link btn-large">Remove</button><br>
+                                            </form>
                                             <a href="">Save for later</a>
                                         </td>
                                         <td>
@@ -66,6 +79,9 @@
                         <button class="btn btn-outline-info">Proceed to checkout</button>
                         <hr>
                     </div>
+                @else
+                    <h1> There Is no Item in Cart !</h1>
+                    <a href="/"class="btn btn-outline-dark">Continue Shopping</a>
         @endif
         <div class="col-md-12">
             <h4>2 items Save for Later</h4>

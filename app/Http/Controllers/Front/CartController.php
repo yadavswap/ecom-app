@@ -21,4 +21,12 @@ class CartController extends Controller
         return redirect()->back()->with('msg', 'Item has been added cart !');
 
     }
+
+    public function destroy($id)
+    {
+        Cart::remove($id);
+        return redirect()->back()->with('msg', 'Item has been remove from cart !');
+
+   
+    }
 }
