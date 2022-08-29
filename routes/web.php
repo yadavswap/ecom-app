@@ -15,15 +15,16 @@
 //     return view('welcome');
 // });
 
+use App\Http\Controllers\OrderController;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\LoginController;
+use App\Http\Controllers\Front\CheckoutController;
 use App\Http\Controllers\Front\RegisterController;
 use App\Http\Controllers\Front\UserProfileController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductController;
-use Gloudemans\Shoppingcart\Facades\Cart;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::resource('product', 'ProductController');
@@ -60,3 +61,6 @@ Route::delete('/cart/destroy/{id}', [CartController::class, 'destroy'])->name('c
 Route::get('/cart/saveForLater/{id}', [CartController::class, 'saveForLater'])->name('cart.saveForLater');
 Route::delete('/saveForLater/destroy/{id}', [CartController::class, 'saveForLaterDestroy'])->name('cart.saveForLaterDestroy');
 Route::get('/cart/moveToCart/{id}', [CartController::class, 'moveToCart'])->name('cart.moveToCart');
+
+// checkout
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
