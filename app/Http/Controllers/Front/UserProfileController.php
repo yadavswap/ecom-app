@@ -22,6 +22,7 @@ class UserProfileController extends Controller
     public function show($id)
     {
         $order = Order::find($id);
+        // dd($order);
        return view('front.profile.details',compact('order'));
     }
 }

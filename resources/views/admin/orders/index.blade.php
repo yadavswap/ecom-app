@@ -33,13 +33,21 @@
                                 <td>{{ $order->id }}</td>
                                 <td>{{ $order->user->name }}</td>
                                 <td>
-                                    @foreach ($order->products as $product)
-                                        {{ $product->name }}
+                                   @foreach ($order->products as $item)
+                                        <table class="table">
+                                            <tr>
+                                                <td>{{ $item->name }}</td>
+                                            </tr>
+                                        </table>
                                     @endforeach
                                 </td>
                                 <td>
-                                    @foreach ($order->orderItems as $item)
-                                        {{ $item->quantity }}
+                                   @foreach ($order->orderItems as $item)
+                                        <table class="table">
+                                            <tr>
+                                                <td>{{ $item->quantity }}</td>
+                                            </tr>
+                                        </table>
                                     @endforeach
                                   
                                 </td>

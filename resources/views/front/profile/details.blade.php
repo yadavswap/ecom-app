@@ -22,6 +22,7 @@
                     </tr>
                     </thead>
                     <tbody>
+                      
                     <tr>
                         <td>{{ $order->id }}</td>
                         <td>{{ $order->date }}</td>
@@ -33,6 +34,7 @@
                                 <span class="badge badge-warning">Pending</span>
                             @endif
                         </td>
+                        </tr>
 
                     </tbody>
                 </table>

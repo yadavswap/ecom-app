@@ -16,7 +16,6 @@ class UserController extends Controller
     {
         $orders = Order::where('user_id', $id)->get();
 
-        // dd($data);
         return view('admin.users.details',compact('orders'));
     }
 }
