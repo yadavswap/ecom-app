@@ -64,4 +64,6 @@ Route::get('/cart/moveToCart/{id}', [CartController::class, 'moveToCart'])->name
 
 // checkout
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
-Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+Route::post('/pay' , [CheckoutController::class, 'pay']);
+Route::get('/payment' , [CheckoutController::class, 'payment'])->name('payment');

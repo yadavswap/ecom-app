@@ -76,7 +76,7 @@
                     <!-- Save for later  -->
                     <div class="col-md-12">
                         <button class="btn btn-outline-dark">Continue Shopping</button>
-                        <button class="btn btn-outline-info">Proceed to checkout</button>
+                        <a href={{ route('checkout') }} class="btn btn-outline-info">Proceed to checkout</a>
                         <hr>
                     </div>
                 @else
