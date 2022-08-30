@@ -2,7 +2,11 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Order;
+use App\OrderItem;
 use App\Payment;
+use App\Product;
+use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Razorpay\Api\Api;
@@ -15,6 +19,11 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
 
@@ -40,18 +49,44 @@ class CheckoutController extends Controller
         $api     = new Api('rzp_test_evEOCCEcbjwPij', 'zwhSAd5IQ97tNvJ6NMOfUTSg');
         $order   = $api->order->create(array('receipt' => '123', 'amount' => $amount * 100, 'currency' => 'INR')); // Creates order
         $orderId = $order['id'];
+        // data insert into order table
 
+        $order = Order::create([
+            'user_id' => auth()->user()->id,
+            'address' => $request->address,
+            'date'    => Carbon::now(),
+            'status'  => 0,
+        ]);
         $user_pay = new Payment();
 
         $user_pay->name       = $name;
         $user_pay->amount     = $amount;
         $user_pay->payment_id = $orderId;
+        $user_pay->user_id    = auth()->user()->id;
+        $user_pay->order_id   = $order->id;
+
         $user_pay->save();
 
         $data = array(
             'order_id' => $orderId,
             'amount'   => $amount,
         );
+
+        // Order item store data
+        foreach (Cart::instance('default')->content() as $item) {
+
+            $product    = Product::find($item->id);
+            $order_item = OrderItem::create([
+                'order_id'   => $order->id,
+                'product_id' => $product->id,
+                'quantity'   => $item->qty,
+                'price'      => $item->price,
+
+            ]);
+
+        }
+
+        Cart::instance('default')->destroy();
 
         return redirect()->route('payment')->with('data', $data);
 

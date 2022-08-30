@@ -73,6 +73,8 @@
                         @endphp
                         <input type="hidden" name="name" class="form-control" id="exampleInputPassword1"
                             value='{{ $item->name }}'>
+                          <input type="hidden" name="product_id" class="form-control" id="exampleInputPassword1"
+                            value='1'>
                         <input type="hidden" name="description" class="form-control" id="exampleInputPassword1"
                             value='{{ $description->description }}'>
                         <td><img src="{{ asset('uploads' . '/' . $description->image) }}" alt=""
@@ -93,21 +95,21 @@
             <table class="table your-order-table table-bordered">
                 <tr>
                     <th colspan="2" ">Price Details</th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Subtotal</td>
-                                                                        <td>Rs. {{ Cart::subtotal() }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Tax</td>
-                                                                        <td>Rs. {{ Cart::tax() }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th>Total</th>
-                                                                        <th>Rs. {{ Cart::total() }}</th>
-                                                                    </tr>
-                                                                </table>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Subtotal</td>
+                                                                            <td>Rs. {{ Cart::subtotal() }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Tax</td>
+                                                                            <td>Rs. {{ Cart::tax() }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>Total</th>
+                                                                            <th>Rs. {{ Cart::total() }}</th>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                <!-- /.container -->
+                                                    <!-- /.container -->
 @endsection
