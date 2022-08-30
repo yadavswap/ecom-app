@@ -19,33 +19,40 @@
                     <div class="form-group col-md-6">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                        <span class="text-danger">{{ $errors->has('email') ? $errors->first('email') : '' }}</span>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Password">
+                        <span class="text-danger">{{ $errors->has('name') ? $errors->first('name') : '' }}</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="address">Address</label>
                     <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St">
+                    <span class="text-danger">{{ $errors->has('address') ? $errors->first('address') : '' }}</span>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="city">City</label>
                         <input type="text" class="form-control" id="city" name="city" placeholder="City">
+                        <span class="text-danger">{{ $errors->has('city') ? $errors->first('city') : '' }}</span>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="provance">Provance</label>
                         <input type="text" class="form-control" id="provance" name="provance" placeholder="Provance">
+                        <span class="text-danger">{{ $errors->has('provance') ? $errors->first('provance') : '' }}</span>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="postal">Postal</label>
                         <input type="text" class="form-control" id="postal" name="postal" placeholder="Postal">
+                        <span class="text-danger">{{ $errors->has('postal') ? $errors->first('postal') : '' }}</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone</label>
                     <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+                    <span class="text-danger">{{ $errors->has('phone') ? $errors->first('phone') : '' }}</span>
                 </div>
                 <hr>
                 <button type="submit" class="btn btn-outline-info col-md-12">Complete Order</button>
@@ -68,7 +75,8 @@
                             value='{{ $item->name }}'>
                         <input type="hidden" name="description" class="form-control" id="exampleInputPassword1"
                             value='{{ $description->description }}'>
-                        <td><img src="{{ asset('uploads' . '/' . $description->image) }}" alt="" style="width: 4em">
+                        <td><img src="{{ asset('uploads' . '/' . $description->image) }}" alt=""
+                                style="width: 4em">
                         </td>
                         <td>
                             <strong>{{ $item->name }}</strong><br>
@@ -85,21 +93,21 @@
             <table class="table your-order-table table-bordered">
                 <tr>
                     <th colspan="2" ">Price Details</th>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Subtotal</td>
-                                                            <td>Rs. {{ Cart::subtotal() }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Tax</td>
-                                                            <td>Rs. {{ Cart::tax() }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Total</th>
-                                                            <th>Rs. {{ Cart::total() }}</th>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                    <!-- /.container -->
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Subtotal</td>
+                                                                        <td>Rs. {{ Cart::subtotal() }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Tax</td>
+                                                                        <td>Rs. {{ Cart::tax() }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Total</th>
+                                                                        <th>Rs. {{ Cart::total() }}</th>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                <!-- /.container -->
 @endsection

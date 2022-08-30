@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -75,5 +77,25 @@ class CartController extends Controller
         Cart::instance('default')->add($item->id, $item->name, 1, $item->price, 0);
         return redirect()->back()->with('msg', 'Item has been move to cart !');
 
+    }
+
+
+    // update
+    public function update(Request $request,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            'qty' => 'required|numeric|between: 1,5'
+        ]);
+
+        if ($validator->fails()) {
+            session()->flash('errors','Quantity must be between 1 and 5');
+            return response()->json(['success' => false]);
+        }
+
+        Cart::update($id, $request->qty);
+
+        session()->flash('msg','Quantity has been updated');
+
+        return response()->json(['success' => true]);
     }
 }

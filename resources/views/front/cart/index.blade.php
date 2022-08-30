@@ -4,13 +4,21 @@
         <h2 class="mt-5"><i class="fa fa-shopping-cart"></i> Shooping Cart</h2>
         <hr>
         @if (Cart::instance('default')->count() > 0)
-            <h4 class="mt-5">4 items(s) in Shopping Cart</h4>
+            <h4 class="mt-5">{{Cart::instance()->count()}} items(s) in Shopping Cart</h4>
             <div class="cart-items">
                 <div class="row">
                     <div class="col-md-12">
                         @if (session()->has('msg'))
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 {{ session()->get('msg') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                         @if (session()->has('errors'))
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                {{ session()->get('errors') }}
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -38,9 +46,12 @@
                                             <a href="{{ route('cart.saveForLater', $item->rowId) }}">Save for later</a>
                                         </td>
                                         <td>
-                                            <select name="" id="" class="form-control" style="width: 4.7em">
-                                                <option value="">1</option>
-                                                <option value="">2</option>
+                                            <select name="" id="" class="form-control qty"
+                                                style="width: 4.7em" data-id={{ $item->rowId }}>
+                                                <option {{$item->qty == 1 ? 'selected' : ''}}>1</option>
+                                                <option {{$item->qty == 2 ? 'selected' : ''}}>2</option>
+                                                <option {{$item->qty == 3 ? 'selected' : ''}}>3</option>
+                                                <option {{$item->qty == 4 ? 'selected' : ''}}>4</option>
                                             </select>
                                         </td>
                                         <td>Rs. {{ $item->total() }}</td>
@@ -113,9 +124,11 @@
                                 <a href="{{ route('cart.moveToCart', $item->rowId) }}">Move to Cart</a>
                             </td>
                             <td>
-                                <select name="" id="" class="form-control" style="width: 4.7em">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
+                                <select name="" id="" class="form-control " style="width: 4.7em">
+                                    <option>1</option>
+                                    <option>2</option>
+
+
                                 </select>
                             </td>
                             <td>Rs. {{ $item->total() }}</td>
@@ -127,4 +140,23 @@
     </div>
     </div>
     </div>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        const className = document.querySelectorAll('.qty');
+        Array.from(className).forEach(function(el) {
+            el.addEventListener('change', function() {
+                const id = el.getAttribute('data-id');
+                axios.patch(`/cart/update/${id}`, {
+                        qty : this.value
+                    })
+                    .then(function(response) {
+                        location.reload();
+                    })
+                    .catch(function(error) {
+                        location.reload();
+                    });
+                console.log(id);
+            })
+        })
+    </script>
 @endsection

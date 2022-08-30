@@ -54,6 +54,8 @@ Route::get('/user/order/{id}', [UserProfileController::class, 'show'])->name('us
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+Route::patch('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+
 Route::get('/empty', function () {
     Cart::instance()->destroy();
 });

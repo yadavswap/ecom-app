@@ -3,8 +3,6 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Payment;
-use Cartalyst\Stripe\Laravel\Facades\Stripe;
-use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Razorpay\Api\Api;
@@ -22,11 +20,19 @@ class CheckoutController extends Controller
 
         return view('front.checkout.index');
     }
-   
-    
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name'     => 'required',
+            'email'    => 'required|email',
+            'address'  => 'required',
+            'city'     => 'required',
+            'provance' => 'required',
+            'postal'   => 'required',
+            'phone'    => 'required',
+
+        ]);
 
         $name   = $request->input('name');
         $amount = $request->input('amount');
@@ -46,8 +52,6 @@ class CheckoutController extends Controller
             'order_id' => $orderId,
             'amount'   => $amount,
         );
-
-    
 
         return redirect()->route('payment')->with('data', $data);
 
@@ -84,9 +88,7 @@ class CheckoutController extends Controller
             return redirect()->route('payment')->with('msg', 'Order Failure !');
         }
     }
-    
-   
-    
+
     public function payment()
     {
         return view('front.payment.index');
